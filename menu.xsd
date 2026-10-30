@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="breakfast_menu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="food" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="price">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="priceType">
+                      <xs:attribute name="unit" use="required" fixed="EUR"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="description" type="xs:string"/>
+              <xs:element name="calories" type="caloriesType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="priceType">
+    <xs:restriction base="xs:decimal">
+      <xs:minExclusive value="0"/>
+      <xs:pattern value="\d+\.\d{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="caloriesType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="100"/>
+      <xs:maxInclusive value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
